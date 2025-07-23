@@ -1,39 +1,28 @@
-Dependency Injection using AutoFac in ASP.NET MVC
-This project demonstrates how to implement Dependency Injection (DI) using AutoFac in an ASP.NET MVC application. AutoFac is a powerful Inversion of Control (IoC) container that simplifies dependency management and promotes better software design.
+# Developer Connector 💼🚀
 
-🔧 Technologies Used
-ASP.NET MVC
+**A MERN Stack (MongoDB, Express, React, Node.js) social networking app for developers.**
 
-AutoFac (IoC container)
+## 🚀 Features
 
-C#
+- **User authentication**
+- **Create and manage profiles**
+- **Post and comment system**
+- **GitHub API integration**
 
-Visual Studio
+## 🛠️ Tech Stack
 
-📁 Project Structure
-Controllers/ — MVC controllers using DI
+- **Frontend:** React.js
+- **Backend:** Node.js + Express
+- **Database:** MongoDB
 
-Models/ — Domain models
+## 📦 Getting Started
 
-Services/ — Business logic interfaces and implementations
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/DeveloperConnector.git
 
-App_Start/AutofacConfig.cs — AutoFac container registration and configuration
+# Install dependencies
+npm install
 
-✅ Features
-Loose coupling using interfaces and dependency injection
-
-AutoFac integration and configuration in MVC pipeline
-
-Clean separation of concerns following SOLID principles
-
-🚀 Getting Started
-Clone or download the repository.
-
-Open the .sln file in Visual Studio.
-
-Run the project (AutoFac is configured during application startup).
-
-📚 Learn More
-AutoFac Documentation
-
-ASP.NET MVC Overview
+# Run the app
+npm run dev
