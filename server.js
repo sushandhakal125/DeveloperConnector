@@ -26,6 +26,8 @@ mongoose
 //Passport middleware
 app.use(passport.initialize());
 
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
 //Passport config
 require("./config/passport")(passport);
 
