@@ -13,10 +13,14 @@ const app = express();
 // CORS for frontend → backend calls
 app.use(
   cors({
-    origin: "https://developer-connector.vercel.app",
+    origin: [
+      "https://developer-connector.vercel.app",
+      "https://developer-connector-hk0f3pk6r-sushan-dhakals-projects.vercel.app"
+    ],
     credentials: true
   })
 );
+
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
