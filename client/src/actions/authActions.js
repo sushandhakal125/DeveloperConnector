@@ -18,14 +18,15 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 //Login = Get User Token
+//Login = Get User Token
 export const loginUser = userData => dispatch => {
   api
     .post("/api/users/login", userData)
     .then(res => {
       const token = res.data?.token;
 
-      if (!token || token === "undefined" || token === "null") {
-        console.error("No valid token received from backend:", res.data);
+      if (!token || typeof token !== "string") {
+        console.error("❌ Invalid token received:", res.data);
         dispatch({
           type: GET_ERRORS,
           payload: { token: "Invalid token received" }
@@ -34,8 +35,8 @@ export const loginUser = userData => dispatch => {
       }
 
       localStorage.setItem("jwtToken", token);
-      setAuthToken(token); // Will now apply correct Bearer format
-      const decoded = jwt_decode(token);
+      setAuthToken(token.startsWith("Bearer ") ? token : `Bearer ${token}`);
+      const decoded = jwt_decode(token.replace("Bearer ", ""));
       dispatch(setCurrentUser(decoded));
     })
     .catch(err => {
@@ -46,6 +47,7 @@ export const loginUser = userData => dispatch => {
       });
     });
 };
+
 
 //Set logged in user
 export const setCurrentUser = decoded => {
