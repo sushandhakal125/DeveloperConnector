@@ -3,12 +3,12 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 
 const initialState = {};
-
 const middleware = [thunk];
 
-// Use Redux DevTools in dev only, fallback to normal compose in production
+// Enable Redux DevTools only in development
 const composeEnhancers =
   typeof window !== "undefined" &&
+  process.env.NODE_ENV === "development" &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : compose;
