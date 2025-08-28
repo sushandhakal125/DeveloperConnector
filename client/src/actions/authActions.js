@@ -12,7 +12,7 @@ export const registerUser = (userData, history) => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data || { error: "Login Failed" }
+        payload: err.response.data || { error: "Registration Failed" }
       })
     );
 };
@@ -22,23 +22,29 @@ export const loginUser = userData => dispatch => {
   api
     .post("/api/users/login", userData)
     .then(res => {
-      // Save to localStorage
-      const { token } = res.data;
-      //Set token to ls
+      const token = res.data?.token;
+
+      if (!token || token === "undefined" || token === "null") {
+        console.error("No valid token received from backend:", res.data);
+        dispatch({
+          type: GET_ERRORS,
+          payload: { token: "Invalid token received" }
+        });
+        return;
+      }
+
       localStorage.setItem("jwtToken", token);
-      //Set token to Auth header
-      setAuthToken(token);
-      //Decode token to get user data
+      setAuthToken(token); // Will now apply correct Bearer format
       const decoded = jwt_decode(token);
-      //Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err =>
+    .catch(err => {
+      console.error("Login failed:", err.response?.data || err.message);
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data || { error: "Login Failed" }
-      })
-    );
+        payload: err.response?.data || { error: "Login Failed" }
+      });
+    });
 };
 
 //Set logged in user
